@@ -28,7 +28,7 @@ Resources:
             Principal:
               Service: codebuild.amazonaws.com
             Action: 'sts:AssumeRole'
-      #this policy copied from AWS documentation 
+      #this policy copied from AWS documentations
       Policies:
         - PolicyName: root
           PolicyDocument:
