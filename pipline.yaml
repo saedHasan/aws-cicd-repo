@@ -1,5 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: CI/CD pipeline for GitHub projects
+# Add parameter for github in order to use this template for different repo
 Parameters:
   GitHubOwner:
     Type: String
