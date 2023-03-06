@@ -8,6 +8,7 @@ Parameters:
   GitHubRepository:
     Type: String
     AllowedPattern: '[A-Za-z0-9-]+'
+    Default: aws-cicd-repo
   GitHubBranch:
     Type: String
     AllowedPattern: '[A-Za-z0-9-]+'
@@ -64,7 +65,8 @@ Resources:
     Properties:
       AuthType: PERSONAL_ACCESS_TOKEN
       ServerType: GITHUB
-      Token: '{{resolve:secretsmanager:dev:SecretString:new_github_token}}'
+      Token: '{{resolve:secretsmanager:github_tk1:SecretString:github_token_new}}'
+      
   CodeBuilProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
