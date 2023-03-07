@@ -5,15 +5,15 @@ Parameters:
   GitHubOwner:
     Type: String
     AllowedPattern: '[A-Za-z0-9-]+'
-    Default: saedHasan
+    Default: GITHUB_OWNER #Change this to your github user
   GitHubRepository:
     Type: String
     AllowedPattern: '[A-Za-z0-9-]+'
-    Default: aws-cicd-repo
+    Default: GITHUB_REPO #Change this to your github repo
   GitHubBranch:
     Type: String
     AllowedPattern: '[A-Za-z0-9-]+'
-    Default: main
+    Default: main #Change this to your github master branch
   CodeBuildEnvironmentImage:
     Type: String
     Default: 'aws/codebuild/standard:4.0'
@@ -69,7 +69,7 @@ Resources:
     Properties:
       AuthType: PERSONAL_ACCESS_TOKEN
       ServerType: GITHUB
-      Token: '{{resolve:secretsmanager:github_tk1:SecretString:github_token_new}}'
+      Token: '{{resolve:secretsmanager:YOUR_GITHUB_TOKEN_NAME:SecretString:YUOR_GITHUB_KEY}}' # change the token name
   #CodeBuild Section   
   CodeBuilProject:
     Type: 'AWS::CodeBuild::Project'
@@ -221,7 +221,7 @@ CodePipelineServiceRole:
     Properties:
       Authentication: GITHUB_HMAC
       AuthenticationConfiguration:
-        SecretToken: '{{resolve:secretsmanager:github_tk1:SecretString:github_token_new}}'
+        SecretToken: '{{resolve:secretsmanager:YOUR_GITHUB_TOKEN_NAME:SecretString:YUOR_GITHUB_KEY}}' # change the token name
       RegisterWithThirdParty: 'true'
       Filters:
         - JsonPath: $.ref
@@ -259,7 +259,7 @@ CodePipelineServiceRole:
                 Repo: !Ref GitHubRepository
                 Branch: !Ref GitHubBranch
                 PollForSourceChanges: false
-                OAuthToken: '{{resolve:secretsmanager:github_tk1:SecretString:github_token_new}}'
+                OAuthToken: '{{resolve:secretsmanager:YOUR_GITHUB_TOKEN_NAME:SecretString:YUOR_GITHUB_KEY}}' # change the token name
               OutputArtifacts:
                 - Name: SourceCode
         - Name: Build
